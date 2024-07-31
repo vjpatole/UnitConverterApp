@@ -23,18 +23,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.vijay.a33unitconverterproject.compose.BaseScreen
-import com.vijay.a33unitconverterproject.data.ConverterDatabase
-import com.vijay.a33unitconverterproject.data.ConverterRepositoryIMPL
 import com.vijay.a33unitconverterproject.ui.theme._33UnitConverterProjectTheme
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var factory: ConverterViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val dao = ConverterDatabase.getInstance(this@MainActivity).converterDao
+        /*val dao = ConverterDatabase.getInstance(this@MainActivity).converterDao
         val repository = ConverterRepositoryIMPL(dao)
-        val factory = ConverterViewModelFactory(repository)
+        val factory = ConverterViewModelFactory(repository)*/
+
         setContent {
             _33UnitConverterProjectTheme {
                 ParentUI(factory)
