@@ -33,7 +33,7 @@ fun HistoryScreen(
         //Display History label and Button if there are records in the DB
         if (list.value.isNotEmpty()) {
             //Need to set Text and button at start and en so,
-            // Set arrangement SpaceBetween
+            //Set arrangement SpaceBetween
             Row(
                 modifier = modifier
                     .fillMaxWidth()

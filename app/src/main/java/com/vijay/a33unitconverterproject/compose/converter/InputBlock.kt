@@ -35,57 +35,114 @@ import com.vijay.a33unitconverterproject.data.Conversion
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InputBlock(
+    isLandScape: Boolean,
     conversion: Conversion,
     inputText: MutableState<String>,
     modifier: Modifier = Modifier,
     context: Context = LocalContext.current,
     calculate: (String)-> Unit
 ){
-    Column(
-        modifier.padding(0.dp, 20.dp, 0.dp, 0.dp)
-    ) {
-        Row(modifier = modifier.fillMaxWidth()) {
-            TextField(
-                value = inputText.value,
-                onValueChange = {
-                    inputText.value = it
-                },
-                modifier = modifier.fillMaxWidth(0.65F),
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.None,
-                    autoCorrect = true,
-                    keyboardType = KeyboardType.Number
-                ),
-                textStyle = TextStyle(color = Color.DarkGray, fontSize = 24.sp)
-                /*colors = TextFieldDefaults.textFieldColors(
+    if (isLandScape) {
+        Column(
+            modifier.padding(0.dp, 20.dp, 0.dp, 0.dp)
+        ) {
+            Row() {
+                TextField(
+                    value = inputText.value,
+                    onValueChange = {
+                        inputText.value = it
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrect = true,
+                        keyboardType = KeyboardType.Number
+                    ),
+                    textStyle = TextStyle(color = Color.DarkGray, fontSize = 18.sp)
+                    /*colors = TextFieldDefaults.textFieldColors(
                     containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.3F),
 
                 )*/
-            )
+                )
 
-            Text(text = conversion.convertFrom,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = modifier
-                    .padding(10.dp, 30.dp, 0.dp, 0.dp)
-                    .fillMaxWidth(0.35F))
+                Text(
+                    text = conversion.convertFrom,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = modifier
+                        .padding(10.dp, 30.dp, 0.dp, 0.dp)
+                )
+            }
+
+            Spacer(modifier = modifier.height(20.dp))
+
+            OutlinedButton(
+                onClick = {
+                    if (inputText.value != "")
+                        calculate(inputText.value)
+                    else
+                        Toast.makeText(context, "Enter valid Number", Toast.LENGTH_SHORT).show()
+                },
+            ) {
+                Text(
+                    text = "Convert",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Blue
+                )
+            }
         }
+    }else {
 
-        Spacer(modifier = modifier.height(20.dp))
+        Column(
+            modifier.padding(0.dp, 20.dp, 0.dp, 0.dp)
+        ) {
+            Row(modifier = modifier.fillMaxWidth()) {
+                TextField(
+                    value = inputText.value,
+                    onValueChange = {
+                        inputText.value = it
+                    },
+                    modifier = modifier.fillMaxWidth(0.65F),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrect = true,
+                        keyboardType = KeyboardType.Number
+                    ),
+                    textStyle = TextStyle(color = Color.DarkGray, fontSize = 18.sp)
+                    /*colors = TextFieldDefaults.textFieldColors(
+                    containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.3F),
 
-        OutlinedButton(onClick = {
-            if(inputText.value != "")
-                calculate(inputText.value)
-            else
-                Toast.makeText(context, "Enter valid Number", Toast.LENGTH_SHORT).show()
-        },
-            modifier = modifier.fillMaxWidth()) {
-            Text(
-                text = "Convert",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Blue
-            )
+                )*/
+                )
+
+                Text(
+                    text = conversion.convertFrom,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = modifier
+                        .padding(10.dp, 30.dp, 0.dp, 0.dp)
+                        .fillMaxWidth(0.35F)
+                )
+            }
+
+            Spacer(modifier = modifier.height(20.dp))
+
+            OutlinedButton(
+                onClick = {
+                    if (inputText.value != "")
+                        calculate(inputText.value)
+                    else
+                        Toast.makeText(context, "Enter valid Number", Toast.LENGTH_SHORT).show()
+                },
+                modifier = modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Convert",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Blue
+                )
+            }
         }
     }
 }

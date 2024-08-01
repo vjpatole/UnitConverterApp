@@ -24,7 +24,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.vijay.a33unitconverterproject.compose.BaseScreen
 import com.vijay.a33unitconverterproject.ui.theme._33UnitConverterProjectTheme
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
